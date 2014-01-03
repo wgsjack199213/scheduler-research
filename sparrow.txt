@@ -1,0 +1,9 @@
+Sparrow: Distributed, Low Latency Scheduling
+
+【参考资料】
+ppt:
+http://www.eecs.berkeley.edu/~keo/talks/sparrow-sosp-talk.pdf
+
+网络博文介绍：
+http://blog.csdn.net/pelick/article/details/17093801
+
