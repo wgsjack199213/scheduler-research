@@ -1,1 +1,40 @@
-Wang Guosai is working on this
+【参考资料】
+http://developer.yahoo.com/blogs/hadoop/next-generation-apache-hadoop-mapreduce-3061.html
+一张架构图（来自上述链接）：http://l3.yimg.com/bt/api/res/1.2/1AiB03rt.8umV5gQrSL7qQ--/YXBwaWQ9eW5ld3M7cT04NQ--/http://media.zenfs.com/en-US/blogs/ept_prod/MapReduce_NextGen.jpg
+
+https://issues.apache.org/jira/browse/MAPREDUCE-279
+
+
+
+Hadoop的特点？
+large scale computing (6000节点的cluster), processing large data sets
+
+下一代MapReduce想实现啥？
+provides high-availability, enhances cluster utilization, provides support for programming paradigms, enables rapid future evolution 
+
+下一代MapReduce的一项重要变革？
+divide the two major functions of the JobTracker, resource management and job scheduling/monitoring, into separate components
+
+谁是调度器？
+ResourceManager is the schedluer.
+(在MR 2.0中这个就叫做Scheduler)
+based the resource requirements of applications (it does so based on the abstract notion of a Resource Container which incorporates elements such as memory, cpu, disk, network etc)
+manages the global assignment of compute resources to applications
+（per-application ApplicationMaster manages the application’s scheduling and coordination）
+
+神马是application？
+either a single job in the classic MapReduce jobs or a DAG of such jobs
+
+ResourceManager支持啥？
+supports hierarchical application queues that can be guaranteed a percentage of the cluster resources
+is pure scheduler (只管调度，不管监控状态，不管restart failed tasks)
+
+调度什么资源？
+memory, CPU, disk, network
+this is a significant change from the current model of fixed-type slots in Hadoop MapReduce
+
+用什么调度策略？
+has a scheduler policy plug-in
+can be based for example on: CapacityScheduler, FairScheduler
+
+我会查查这两个Scheduler 

@@ -7,3 +7,10 @@ scheduler的常见算法
       Quincy
       2. 线性规划
 
+
+
+
+
+
+[笔记]关于贪心：Sparrow中用的作为比较基准的omniscient scheduler:
+uses a greedy scheduling algorithm based on complete information about which worker machines are busy. For each incoming job, the scheduler places the job’s tasks on idle workers, if any exist, and otherwise uses FIFO queueing
