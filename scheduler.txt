@@ -3,16 +3,15 @@ scheduler分类：centralized/decentralized 面向系统当前状态/过去全�
 scheduler的常见算法
 1. 贪心
   nova-scheduler: nova的默认scheduler先通过用户指定的条件过滤掉不符合条件的host，对剩下的host，计算每个host的权值weight=剩余RAM，选择权值最大的host放置虚拟机
-    Sparrow: 基于The Power of Two Choices in Randomized Load Balancing 思想，为每个job的m个tasks随机选择m*d个可用的worker，并让worker每次空闲时向scheduler请求task。
-      Quincy
-      2. 线性规划
-Queue-based scheduling: 
-model: 1.集群架构中，每个rack上的服务器由一个local switch连接，所有rack switch由一个core switch连接（好像跟我们机房是一样的），所以同一个rack上的computers之间通信代价要比不同rack间的通信代价低。
-2.每个Job由一个被称为’root task’的process（每个Job有1个）管理这个Job的workflow，workflow是一个DAG，每个点包含一个task的状态（完成/可以开始运行），边代表task之间的依赖关系。
+  Sparrow: 基于The Power of Two Choices in Randomized Load Balancing 思想，为每个job的m个tasks随机选择m*d个可用的worker，并让worker每次空闲时向scheduler请求task。
+  Queue-based scheduling: 
+  model: 1.集群架构中，每个rack上的服务器由一个local switch连接，所有rack switch由一个core switch连接（好像跟我们机房是一样的），所以同一个rack上的computers之间通信代价要比不同rack间的通信代价低。
+  2.每个Job由一个被称为’root task’的process（每个Job有1个）管理这个Job的workflow，workflow是一个DAG，每个点包含一个task的状态（完成/可以开始运行），边代表task之间的依赖关系。
   算法总述：scheduler为每个computer、rack和整个集群各维护一个task的队列（Figure 3 in Quincy）。当一个task被分配到一台computer时，将被从所有包含它的队列中移除。算法忽略传输数据大小，并将所有可用的computer视为一样的。当一个新的Job产生时，首先找一个空闲的机器运行这个Job的root task，若没有空闲机器，就找一台机器运行root task并把这台机器上正在运行的task踢掉，将这个task重新丢给scheduler调度。
-    最简单的贪心：当一个computer free时，选择该computer的task队列第一个ready的task，若不存在，从该computer所在的rack的task队列选择，若这个队列中也不存在ready task，就从整个cluster的队列中选择。
-      带公平性的贪心：当一个computer free时，为每个Job j计算分配的computer数量A_j*=min(\ceil(M/K), N_j)，这里M是computer数量，K是在运行的Job个数，N_j是当前运行Job j的task，或有Job j的task在等待的computer个数。对于所有Job j，将A_j*个computer分配后，若\sum_j A_j*<M，即有computer剩余，则将剩余的computer均分给A_j*<N_j的Job，分配后每个Job得到了A_j。对每个Job，若它占用的computer个数大于等于A_j，则将它block掉，不允许它的task被加入任何队列。
-        抢占式带公平性的贪心：当一个Job j用了大于A_j个worker，scheduler将它多运行的tasks全部kill掉，然后调度最近被调度的task。
+  最简单的贪心：当一个computer free时，选择该computer的task队列第一个ready的task，若不存在，从该computer所在的rack的task队列选择，若这个队列中也不存在ready task，就从整个cluster的队列中选择。
+  带公平性的贪心：当一个computer free时，为每个Job j计算分配的computer数量A_j*=min(\ceil(M/K), N_j)，这里M是computer数量，K是在运行的Job个数，N_j是当前运行Job j的task，或有Job j的task在等待的computer个数。对于所有Job j，将A_j*个computer分配后，若\sum_j A_j*<M，即有computer剩余，则将剩余的computer均分给A_j*<N_j的Job，分配后每个Job得到了A_j。对每个Job，若它占用的computer个数大于等于A_j，则将它block掉，不允许它的task被加入任何队列。
+  抢占式带公平性的贪心：当一个Job j用了大于A_j个worker，scheduler将它多运行的tasks全部kill掉，然后调度最近被调度的task。
+2. 线性规划
 3. 网络流
   Quincy: 建立一个流图（figure4），可以将调度问题等价为求图的最小费用流。???????
 
