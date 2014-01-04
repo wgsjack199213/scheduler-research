@@ -1,4 +1,20 @@
 Mesos: A Platform for Fine-Grained Resource Sharing in the Data Center
+NSDI 2011
 
+是什么？
+a platform for sharing commodity clusters between multiple diverse cluster computing frameworks, such as Hadoop and MPI.
 
-Wang Guosai is working on this…
+和YARN的对比
+http://dongxicheng.org/mapreduce-nextgen/mesos_vs_yarn/
+
+谁是调度器？
+Mesos master node
+
+调度部分？
+frameworks register their own scheduler into Mesos
+two level: 1 mesos master delivers idle resource to a certain framework (所以粒度很粗); 2 the framework’s own scheduler
+Mesos decides how many resources to offer each framework, while frameworks decide which resources to accept and which computations to run on them
+
+资源分配策略？
+pluggable
+so far, two modules are implemented: 1 fair sharing based on a generalization of max-min fairness for multiple resources (Dominant resource fairness: fair allocation of multiple resource types), 2 strict priorities
