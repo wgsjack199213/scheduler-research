@@ -73,6 +73,10 @@ priority
 ==============================================================
 Fair Scheduler(公平调度器)
 
+有篇论文：
+Job Scheduling for Multi-User MapReduce Clusters
+http://www.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-55.pdf
+
 https://hadoop.apache.org/docs/r1.2.1/fair_scheduler.html
 http://dongxicheng.org/mapreduce/mapreduce/hadoop-0-21-0-fair-scheduler/
 http://www.cnblogs.com/spork/archive/2010/04/02/1703428.html
@@ -83,6 +87,8 @@ http://dongxicheng.org/wp-content/uploads/2011/12/fair-scheduler.jpg
 
 目的？
 assigns resources to jobs such that all jobs get, on average, an equal share of resources over time.
+The fair scheduler organizes jobs into pools, and divides resources fairly between these pools. By default, there is a separate pool for each user, so that each user gets an equal share of the cluster.
+
 
 each user belongs to a Pool (作业池)
 
