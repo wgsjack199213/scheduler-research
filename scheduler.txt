@@ -1,4 +1,4 @@
-cheduler的任务：cluster中的workload会产生许多job，每个job包含1个或多个task，一般地，scheduler决定每个task被分配到哪个worker machine上
+scheduler的任务：cluster中的workload会产生许多job，每个job包含1个或多个task，一般地，scheduler决定每个task被分配到哪个worker machine上
 scheduler分类：centralized/decentralized 面向系统当前状态/过去全部状态 面向服务器状态/网络状态 面向所需数据 局部调度/全局调度???
 scheduler的常见算法
 1. 贪心
