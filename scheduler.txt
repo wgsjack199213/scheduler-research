@@ -1,0 +1,9 @@
+cheduler的任务：cluster中的workload会产生许多job，每个job包含1个或多个task，一般地，scheduler决定每个task被分配到哪个worker machine上
+scheduler分类：centralized/decentralized 面向系统当前状态/过去全部状态 面向服务器状态/网络状态 面向所需数据 局部调度/全局调度???
+scheduler的常见算法
+1. 贪心
+  nova-scheduler: nova的默认scheduler先通过用户指定的条件过滤掉不符合条件的host，对剩下的host，计算每个host的权值weight=剩余RAM，选择权值最大的host放置虚拟机
+    Sparrow: 基于The Power of Two Choices in Randomized Load Balancing 思想，为每个job的m个tasks随机选择m*d个可用的worker，并让worker每次空闲时向scheduler请求task。
+      Quincy
+      2. 线性规划
+
