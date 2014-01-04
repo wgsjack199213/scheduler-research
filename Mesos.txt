@@ -8,7 +8,7 @@ a platform for sharing commodity clusters between multiple diverse cluster compu
 http://dongxicheng.org/mapreduce-nextgen/mesos_vs_yarn/
 
 谁是调度器？
-Mesos master node
+Mesos master node(centralized global schedule)
 
 调度部分？
 frameworks register their own scheduler into Mesos
@@ -18,3 +18,7 @@ Mesos decides how many resources to offer each framework, while frameworks decid
 资源分配策略？
 pluggable
 so far, two modules are implemented: 1 fair sharing based on a generalization of max-min fairness for multiple resources (Dominant resource fairness: fair allocation of multiple resource types), 2 strict priorities
+
+DRF算法
+
+http://dongxicheng.org/apache-mesos/mesos-scheduler/
