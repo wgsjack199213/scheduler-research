@@ -15,7 +15,10 @@ scheduler的常见算法
 2. 线性规划
 3. 网络流
   Quincy: 建立一个流图（figure4），可以将调度问题等价为求图的最小费用流。???????
-
+4. ?????
+Dynamic Virtual Machine Scheduling in Clouds for Architectural Shared Resources
+cache会存储在CPU反复调用的子程序，CPU在工作的时候会先访问cache看看有没有这个子程序，如果有的，则这个访问被称作命中。cacheaware cloud scheduling最小化last-level cache(LLC)的未命中次数。
+该算法先收集所有虚拟机中的LLC未命中，将虚拟机按LLC未命中次数排序，平均分到许多socket里面。然后获取LLC未命中次数的最大值和最小值，若它们的差超过设定的极限，就交换他们的socket
 
 
 
