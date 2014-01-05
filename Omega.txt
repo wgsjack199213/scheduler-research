@@ -1,0 +1,4 @@
+Omega: flexible, scalable schedulers for large compute clusters
+ECCS 2013
+
+Wang Guosai is working here
